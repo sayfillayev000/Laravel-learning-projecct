@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class PageController extends Controller
 {
     public function main()
     {
-        return view('main');  
+        // session('session', false);
+        // session('session', false);
+        // dd(session()->all());
+        return view('main');
     }
     public function about()
     {
@@ -21,7 +25,7 @@ class PageController extends Controller
     public function projects()
     {
         return view('projects');
-    }  
+    }
     public function contact()
     {
         return view('contact');

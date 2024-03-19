@@ -1,12 +1,5 @@
 <x-layouts.main>
 
-
-    {{-- <x-slot:title>
-
-        Bosh sahifa
-    
-    </x-slot:title> --}}
-
     <x-page-header>
         Yangi Post yaratish
     </x-page-header>
@@ -16,16 +9,30 @@
             @csrf
             <div class="form-row">
                 <div class="col-sm-6 control-group">
-                    <input type="text" class="form-control p-4" name="phone_number" placeholder="Phone number"
-                        value="{{ old('phone_number') }}" />
-                    @error('phone_number')
+                    <input type="text" class="form-control p-4" placeholder="Sarlavha" name="title"
+                        value="{{ old('title') }}" />
+                    @error('title')
                         <p class="help-block text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col-sm-6 control-group">
-                    <input type="text" class="form-control p-4" placeholder="Title" name="title"
-                        value="{{ old('title') }}" />
-                    @error('title')
+                    <select name="category_id" class=" border rounded-5 p-3" style="border-radius:15px; outline: none; border:none">
+                        @foreach ($categories as $category)
+                            <option value={{ $category->id }}>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-sm-6 control-group">
+                    <select multiple name="tags[]" class="kt-selectpicker border rounded-5 p-3" style="border-radius:15px; outline: none; border:none">
+                        @foreach ($tags as $tag)
+                            <option value={{ $tag->id }}>{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-sm-6 control-group">
+                    <input type="text" class="form-control p-4" name="phone_number" placeholder="Telefon raqam"
+                        value="{{ old('phone_number') }}" />
+                    @error('phone_number')
                         <p class="help-block text-danger">{{ $message }}</p>
                     @enderror
                 </div>
@@ -38,7 +45,7 @@
                     @enderror
                 </div>
                 <div class="col-sm-6 control-group">
-                    <input type="text" class="form-control p-4" name="short_content" placeholder="Short_content"
+                    <input type="text" class="form-control p-4" name="short_content" placeholder="Qisqacha malumot"
                         value="{{ old('short_content') }}" />
                     @error('short_content')
                         <p class="help-block text-danger">{{ $message }}</p>
@@ -46,7 +53,7 @@
                 </div>
             </div>
             <div class="control-group">
-                <textarea class="form-control p-4" rows="6" name="content" placeholder="Content">{{ old('content') }}</textarea>
+                <textarea class="form-control p-4" rows="6" name="content" placeholder="To'liq malumot">{{ old('content') }}</textarea>
                 @error('title')
                     <p class="help-block text-danger">{{ $message }}</p>
                 @enderror

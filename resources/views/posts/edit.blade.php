@@ -53,8 +53,9 @@
                     <p class="help-block text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            <div>
-                <button class="btn btn-primary btn-block py-3 px-5" type="submit">Save</button>
+            <div class=" d-flex gap-4">
+                <button class="btn btn-success btn-block py-3 px-5" type="submit">Save</button>
+                <a href="{{ route('posts.show',['post' => $post->id])}}" class="btn btn-danger btn-block py-3 px-5" >Bekor qilish</a>
             </div>
         </form>
     </div>

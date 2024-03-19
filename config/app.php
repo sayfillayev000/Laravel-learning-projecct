@@ -94,7 +94,13 @@ return [
     */
 
     'fallback_locale' => 'en',
-
+    
+    'all_locales' => [
+        'en',
+        'ru',
+        'uz',
+    ],
+    'View' => Illuminate\Support\Facades\View::class,
     /*
     |--------------------------------------------------------------------------
     | Faker Locale

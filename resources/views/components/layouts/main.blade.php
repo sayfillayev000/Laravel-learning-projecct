@@ -25,6 +25,9 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
 <body>
@@ -69,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <x-navbar/>
+                <x-navbar />
             </div>
         </div>
     </div>
