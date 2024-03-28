@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -42,9 +43,23 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+
+    public function hasRole($roleNmae)
+    {
+        foreach ($this->roles as $role) {
+            if ($role->name == $roleNmae) {
+                return true;
+            }
+        }
+        return false;
+    }
     protected function name(): Attribute
     {
-        //////
         return Attribute::make(
             get: fn (string $value) => ucfirst($value),
         );

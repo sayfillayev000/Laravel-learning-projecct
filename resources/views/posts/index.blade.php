@@ -6,7 +6,7 @@
     <!-- Blog Start -->
     <div class="container-fluid py-5">
         <div class="container">
-            @switch(session('status'))
+            @switch(session('status'))    
                 @case('success')
                     <div class="alert alert-success" role="alert">
                         {{ __('Post created successfully!') }}
@@ -55,8 +55,11 @@
                         </div>
                         <h5 class="font-weight-medium mb-2">{{ $post->title }}</h5>
                         <p class="mb-4">{{ $post->short_content }}</p>
-                        <a class="btn btn-sm btn-primary py-2"
-                            href="{{ route('posts.show', ['post' => $post->id]) }}">O'qish</a>
+                        {{-- @dd(auth()->user()->roles) --}}
+                        @if (auth()->user()->hasRole('admin'))
+                            <a class="btn btn-sm btn-primary py-2"
+                                href="{{ route('posts.show', ['post' => $post->id]) }}">O'qish</a>
+                        @endif
                     </div>
                 @endforeach
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StorePostRequest extends FormRequest
 {
@@ -18,12 +20,12 @@ class StorePostRequest extends FormRequest
 
     public function authorize()
     {
-        return true;
+        return Gate::authorize('create-post', Role::where('name', 'blogger')->first());
     }
 
     public function rules()
     {
-         return [
+        return [
             'title' => 'required|max:255',
             'tags' => 'nullable|max:255',
             'phone_number' => 'required',

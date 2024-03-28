@@ -41,11 +41,13 @@ class AuthController extends Controller
     public function register_store(RegisterRequest $request)
     {
         // dd($request);
-        $validated = $request->validated() ;
-        
+        $validated = $request->validated();
+
         $validated['password'] = Hash::make($validated['password']);
-        
+
         $user = User::create($validated);
+
+        $user->roles()->attach(3);
 
         auth()->login($user);
 

@@ -11,6 +11,7 @@ use App\Jobs\ChangePost;
 use App\Jobs\UploadBigFile;
 use App\Mail\PostCreated as MailPostCreated;
 use App\Models\Category;
+use App\Models\Role;
 use App\Models\Tag;
 use App\Notifications\PostCreated as NotificationsPostCreated;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,7 @@ class PostController extends Controller
             return $post->id == 1;
         }));
 
-        dd($post);
+        // dd($post);
         $posts = Cache::remember('posts', now()->addSeconds(60), function () {
             return Post::latest()->paginate(9);
         });
@@ -62,6 +63,12 @@ class PostController extends Controller
     }
     public function create()
     {
+        // dd(Role::find(3));
+        // dd(Role::where('name', 'editor')->first());
+        if (!Gate::authorize('create-post', Role::where('name', 'editor')->first())) {
+            abort(403);
+        }
+
         return view('posts.create')->with([
             'categories' => Category::all(),
             'tags' => Tag::all(),
